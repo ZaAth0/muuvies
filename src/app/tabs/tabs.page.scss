@@ -1,1 +1,33 @@
 
+/* Barra inferior de navegación */
+.muuvies-tab-bar {
+  --background: #fff5f5;
+  --color: #a58b8e;
+  --color-selected: #e58d9e;
+
+  border-top: 1px solid #f5dfe2;
+  height: 68px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: 0 -3px 15px rgba(220, 150, 165, 0.08);
+}
+
+/* Botones de navegación */
+.muuvies-tab-bar ion-tab-button {
+  --background: transparent;
+  --background-focused: #fce5e9;
+  --ripple-color: #e9a3b0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Iconos */
+.muuvies-tab-bar ion-icon {
+  font-size: 23px;
+  margin-bottom: 3px;
+}
+
+/* Pestaña seleccionada */
+.muuvies-tab-bar ion-tab-button.tab-selected {
+  font-weight: 700;
+}
