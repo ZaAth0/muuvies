@@ -1,15 +1,53 @@
-<ion-header [translucent]="true">
+<ion-header class="muuvies-header">
   <ion-toolbar>
-    <ion-title> Catálogo de Películas </ion-title>
+    <ion-title>
+    <span class="logo">muuvies</span>  
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Catálogo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="muuvies-content">
+  <div class="bienvenida">
+    <h1>¿Qué quieres ver hoy?</h1>
+  </div>
+   <ion-searchbar placeholder="Buscar" debounce="500" (ionInput)="buscarPeliculas($event)" class="buscador"></ion-searchbar>
+   <div class="seccion-titulo">
+    <h2>Encuentra tu próxima favorita</h2>
+   </div>
 
-  <app-explore-container name="Catálogo"></app-explore-container>
+   <!--grilla de catalogos-->
+   <ion-grid>
+    <ion-row>
+      @for(pelicula of peliculas; track pelicula.id){
+        <ion-col size="6" size-md="4" size-lg="3">
+          <ion-card class="pelicula-card">
+
+            @if (pelicula.poster_path) {
+              <ion-img
+                [src]="imagenUrl + pelicula.poster_path"
+                [alt]="pelicula.title">
+              </ion-img>
+            } @else {
+              <div class="sin-poster"><br>Sin imagen</div>
+            }
+            <ion-card-content>
+              <h3>{{ pelicula.title }}</h3>
+              <p>{{ pelicula.vote_average | number:'1.1-1' }}</p>
+              <small>
+                {{ pelicula.release_date || 'Sin fecha' }}
+              </small>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+   </ion-grid>
+   @if(peliculas.length === 0 && !cargando){
+    <div class="mensaje-vacio"><p>Ups! No encontramos peliculas que coincidan con tu búsqueda.</p></div>
+   }
+   
+   <ion-infinite-scroll threshold="100px" [disabled]="!hayMasPeliculas" (ionInfinite)="cargarMas($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más películas...">
+    </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
