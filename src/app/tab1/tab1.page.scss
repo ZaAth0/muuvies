@@ -1,0 +1,108 @@
+
+ion-content {
+  --background: #fff8f8;
+}
+
+ion-toolbar {
+  --background: #fff0f2;
+  --color: #34282b;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 25px;
+  letter-spacing: -1px;
+}
+
+.bienvenida {
+  padding: 22px 20px 8px;
+}
+
+.bienvenida h1 {
+  color: #382b2e;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.bienvenida p {
+  color: #a58b8e;
+  margin-top: 5px;
+}
+
+.buscador {
+  --background: #ffffff;
+  --color: #382b2e;
+  --placeholder-color: #b49fa2;
+  --border-radius: 15px;
+  padding: 8px 15px;
+}
+
+.seccion-titulo {
+  padding: 5px 20px;
+}
+
+.seccion-titulo h2 {
+  color: #382b2e;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.seccion-titulo p {
+  color: #ad9297;
+  font-size: 13px;
+}
+
+.pelicula-card {
+  margin: 5px 2px 12px;
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(200, 140, 150, 0.13);
+  overflow: hidden;
+}
+
+.pelicula-card ion-img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+}
+
+.pelicula-card ion-card-content {
+  padding: 10px;
+}
+
+.pelicula-card h3 {
+  color: #382b2e;
+  font-size: 13px;
+  font-weight: 700;
+  min-height: 32px;
+  margin: 0;
+}
+
+.pelicula-card p {
+  color: #d58b99;
+  font-weight: 700;
+  margin: 7px 0;
+}
+
+.pelicula-card small {
+  color: #a58b8e;
+  font-size: 10px;
+}
+
+.sin-poster {
+  height: 205px;
+  background: #fce9ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #a58b8e;
+}
+
+.mensaje-vacio,
+.cargando {
+  text-align: center;
+  padding: 25px;
+  color: #b58e96;
+}
