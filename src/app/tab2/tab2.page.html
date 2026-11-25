@@ -1,15 +1,52 @@
-<ion-header [translucent]="true">
+
+<ion-header class="muuvies-header">
   <ion-toolbar>
-    <ion-title> Géneros </ion-title>
+    <ion-title>
+      <span class="logo">muuvies</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Géneros</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="muuvies-content">
 
-  <app-explore-container name="Géneros"></app-explore-container>
+  <div class="bienvenida">
+    <h1>Explora por géneros</h1>
+    <p>Encuentra películas según lo que te gusta.</p>
+  </div>
+
+  <!-- mientras se cargan los generos se ve cargando -->
+  @if (cargando) {
+    <div class="cargando">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando generos...</p>
+    </div>
+  }
+
+  @if (!cargando && generos.length > 0) {
+    <ion-grid>
+      <ion-row>
+        @for (genero of generos; track genero.id) {
+          <ion-col size="6" size-md="4" size-lg="3">
+            <ion-card class="genero-card">
+              <ion-card-content>
+                <h3>{{ genero.name }}</h3>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  }
+
+  <!-- si no se hay generos -->
+  @if (!cargando && generos.length === 0) {
+    <div class="mensaje-vacio">
+      @if (errorCarga) {
+        <p>No se pudieron cargar los géneros. Intenta nuevamente.</p>
+      } @else {
+        <p>No hay géneros disponibles.</p>
+      }
+    </div>
+  }
+
 </ion-content>
