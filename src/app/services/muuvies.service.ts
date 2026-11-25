@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
+export interface Genero { id: number; name: string; }
+interface ResGeneros { genres: Genero[]; }
+
 @Injectable({
     providedIn: 'root'
 })
@@ -25,5 +28,12 @@ export class MuuviesService {
         const cabeceras = new HttpHeaders({ Authorization: `Bearer ${this.apiToken}` });
 
         return this.http.get(`${this.apiUrl}/search/movie?query=${encodeURIComponent(nombre)}&language=es-ES&page=${pagina}`, { headers: cabeceras });
+    }
+
+    //listado de generos
+    getGeneros(): Observable<ResGeneros> {
+        const cabeceras = new HttpHeaders().set('Authorization', `Bearer ${this.apiToken}`);
+
+        return this.http.get<ResGeneros>(`${this.apiUrl}/genre/movie/list?language=es-ES`, { headers: cabeceras });
     }
 }
