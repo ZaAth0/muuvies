@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonGrid, IonRow, IonCol, IonCard, IonImg, IonCardContent, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonGrid, IonRow, IonCol, IonCard, IonImg, IonCardContent, IonInfiniteScroll, IonInfiniteScrollContent, IonButton } from '@ionic/angular';
 
 import { MuuviesService } from '../services/muuvies.service';
+import { MiListaService } from '../services/miLista.services';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonGrid, IonRow, IonCol, IonCard, IonImg, IonCardContent, IonInfiniteScroll, IonInfiniteScrollContent, DecimalPipe],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonGrid, IonRow, IonCol, IonCard, IonImg, IonCardContent, IonInfiniteScroll, IonInfiniteScrollContent, DecimalPipe, IonButton],
 })
 export class Tab1Page implements OnInit {
 
@@ -21,7 +22,8 @@ export class Tab1Page implements OnInit {
   //url para los posters de las peliculas
   imagenUrl = 'https://image.tmdb.org/t/p/w500';
 
-  constructor(private muuviesService: MuuviesService) {}
+  constructor(private muuviesService: MuuviesService, 
+    private miListaService: MiListaService) {}
 
   ngOnInit() {
     this.cargarPeliculas();
@@ -78,4 +80,14 @@ export class Tab1Page implements OnInit {
       this.cargarPeliculas(event);
     }
   }
+  //agregar la pelicula a mi lista
+  agregarAMiLista(pelicula: any) {
+    this.miListaService.agregar(pelicula);
+  }
+
+  estaEnMiLista(id: number): boolean {
+    return this.miListaService.estaGuardada(id);
+  }
+
+
 }

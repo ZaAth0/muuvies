@@ -1,15 +1,65 @@
-<ion-header [translucent]="true">
+
+<ion-header class="muuvies-header">
   <ion-toolbar>
-    <ion-title> Mi Lista </ion-title>
+    <ion-title>
+      <span class="logo">muuvies</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Mi Lista</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="muuvies-content">
 
-  <app-explore-container name="Mi Lista"></app-explore-container>
+  <div class="bienvenida">
+    <h1>Mi Lista</h1>
+    <p>Acá encontrarás las películas que guardaste.</p>
+  </div>
+
+  @if (peliculasGuardadas.length > 0) {
+    <ion-grid>
+      <ion-row>
+        @for (pelicula of peliculasGuardadas; track pelicula.id) {
+          <ion-col size="6" size-md="4" size-lg="3">
+            <ion-card class="pelicula-card">
+
+              @if (pelicula.poster_path) {
+                <ion-img
+                  [src]="'https://image.tmdb.org/t/p/w500' + pelicula.poster_path"
+                  [alt]="pelicula.title">
+                </ion-img>
+              } @else {
+                <div class="sin-poster">
+                  Sin imagen
+                </div>
+              }
+
+              <ion-card-content>
+                <h3>{{ pelicula.title }}</h3>
+
+                <p>{{ pelicula.vote_average | number:'1.1-1' }}</p>
+
+                <small>
+                  {{ pelicula.release_date || 'Sin fecha' }}
+                </small>
+
+                <ion-button
+                  size="small"
+                  fill="clear"
+                  color="danger"
+                  (click)="eliminarPelicula(pelicula.id)">
+                  Quitar
+                </ion-button>
+
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  } @else {
+    <div class="mensaje-vacio">
+      <h2>Tu lista está vacía</h2>
+      <p>Agregá películas desde el catálogo para encontrarlas acá.</p>
+    </div>
+  }
+
 </ion-content>
